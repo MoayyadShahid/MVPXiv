@@ -1,0 +1,50 @@
+name: Daily Pipeline
+
+on:
+  schedule:
+    # arXiv releases new papers Sun–Thu at 8 PM ET.
+    # Run at 9:30 PM ET to allow propagation.
+    # 9:30 PM ET = 01:30 UTC (EDT) or 02:30 UTC (EST).
+    # We use 02:30 UTC to cover both — at worst we run 1hr early in summer.
+    - cron: '30 2 * * 1-5'  # Mon-Fri UTC = Sun-Thu ET evening
+
+  workflow_dispatch:
+    inputs:
+      date_override:
+        description: 'Override batch date (YYYY-MM-DD), leave empty for today'
+        required: false
+        default: ''
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: automation/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r automation/requirements.txt
+
+      - name: Run daily pipeline
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: |
+          if [ -n "${{ github.event.inputs.date_override }}" ]; then
+            python -c "
+          from automation.run_daily import run_pipeline
+          run_pipeline(date_override='${{ github.event.inputs.date_override }}')
+          "
+          else
+            python -m automation.run_daily
+          fi
