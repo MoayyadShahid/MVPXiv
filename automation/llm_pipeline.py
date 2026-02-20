@@ -77,6 +77,14 @@ Return ONLY raw JSON matching this exact schema. No markdown fences. No commenta
   ]
 }
 
+Scoring anchors (use these to calibrate; most ideas should NOT be 7+ on every dimension):
+- demand_urgency: 0–3 = weak/niche market, 4–6 = moderate demand, 7–10 = strong urgent need
+- pricing_power: 0–3 = hard to monetize, 4–6 = moderate, 7–10 = clear monetization path
+- distribution_ease: 0–3 = hard to reach users, 4–6 = moderate, 7–10 = easy distribution
+- speed_to_mvp: 0–3 = long build (months+), 4–6 = moderate, 7–10 = fast MVP (weeks)
+
+Score critically. Only give 7+ when there is strong evidence. You should have a mix of categories; not every idea can be PROMISING or LUCRATIVE. Many papers are interesting but niche—reflect that in the scores.
+
 Hard requirements:
 - Return ONLY raw JSON. No markdown fences. No commentary.
 - Provide exactly 3 researchThemes.
