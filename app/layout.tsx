@@ -3,7 +3,7 @@ import Header from "@/components/layout/Header";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "MVPXiv — arXiv → MVPs. Daily.",
+  title: "MVPXiv",
   description:
     "Startup-grade project blueprints from cutting-edge ML research, generated daily from arXiv.",
 };
