@@ -1,4 +1,3 @@
-import Link from "next/link";
 import type { Idea } from "@/lib/types";
 import { CATEGORY_META } from "@/lib/categories";
 import CategoryIcon from "./CategoryIcon";
@@ -12,7 +11,7 @@ export default function IdeaCard({ idea }: IdeaCardProps) {
   const meta = CATEGORY_META[idea.category];
 
   return (
-    <Link href={`/ideas/${idea.id}`} className="block group">
+    <div className="block group">
       <article
         className="
           bg-white border-4 border-black p-5
@@ -70,6 +69,6 @@ export default function IdeaCard({ idea }: IdeaCardProps) {
           {formatDate(idea.batchDate)}
         </div>
       </article>
-    </Link>
+    </div>
   );
 }
