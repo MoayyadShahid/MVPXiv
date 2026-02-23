@@ -5,6 +5,8 @@ import { CATEGORY_ORDER, CATEGORY_META } from "@/lib/categories";
 import CategoryIcon from "@/components/CategoryIcon";
 import { formatDate } from "@/lib/formatDate";
 
+export const revalidate = 3600;
+
 export default async function BatchesPage() {
   const batches = await fetchBatches();
 

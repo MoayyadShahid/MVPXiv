@@ -4,6 +4,8 @@ import { fetchBatchByDate } from "@/lib/api";
 import BatchFeed from "@/components/BatchFeed";
 import { formatDate } from "@/lib/formatDate";
 
+export const revalidate = 86400;
+
 interface Props {
   params: { date: string };
 }

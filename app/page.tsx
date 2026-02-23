@@ -2,6 +2,8 @@ import { fetchLatestBatch } from "@/lib/api";
 import Hero from "@/components/Hero";
 import BatchFeed from "@/components/BatchFeed";
 
+export const revalidate = 1800;
+
 export default async function HomePage() {
   const result = await fetchLatestBatch();
 
