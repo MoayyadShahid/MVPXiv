@@ -28,7 +28,7 @@ def fetch_recent_papers(
     Adds inter-category delay to avoid 429 rate limits.
     """
     if categories is None:
-        categories = ["cs.LG", "cs.MA"]
+        categories = ["cs.LG", "cs.MA", "cs.AI", "cs.CL"]
 
     all_papers: list[ArxivPaper] = []
     seen_ids: set[str] = set()

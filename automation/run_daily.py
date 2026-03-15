@@ -52,7 +52,7 @@ def run_pipeline(
     # ── Step 1: Ingest papers ────────────────────────────
     print("\n[1/4] Fetching papers from arXiv...")
     papers = fetch_recent_papers(
-        categories=["cs.LG", "cs.MA"],
+        categories=["cs.LG", "cs.MA", "cs.AI", "cs.CL"],
         max_per_category=max_papers_per_category,
     )
     if not papers:
@@ -95,8 +95,12 @@ def run_pipeline(
         "sources": [
             "cs.LG",
             "cs.MA",
+            "cs.AI",
+            "cs.CL",
             "https://arxiv.org/list/cs.LG/new",
             "https://arxiv.org/list/cs.MA/new",
+            "https://arxiv.org/list/cs.AI/new",
+            "https://arxiv.org/list/cs.CL/new",
         ],
         "research_themes": research_themes[:3],
         "counts_backlog": category_counts.get("BACKLOG", 0),
