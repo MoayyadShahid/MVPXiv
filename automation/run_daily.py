@@ -28,7 +28,7 @@ from supabase import create_client
 
 from automation.ingest_arxiv import fetch_recent_papers
 from automation.llm_pipeline import generate_blueprints
-from automation.categorize import apply_rubric
+from automation.categorize import apply_rubric, enforce_distribution
 
 
 def get_supabase_client():
@@ -75,6 +75,7 @@ def run_pipeline(
     # ── Step 3: Apply categorization rubric ──────────────
     print("\n[3/4] Applying categorization rubric...")
     ideas_categorized = apply_rubric(ideas_raw)
+    ideas_categorized = enforce_distribution(ideas_categorized)
 
     category_counts = Counter(idea["category"] for idea in ideas_categorized)
     for cat in ["BACKLOG", "CONSIDERABLE", "PROMISING", "LUCRATIVE"]:

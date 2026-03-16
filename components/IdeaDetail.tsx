@@ -66,7 +66,7 @@ export default function IdeaDetail({
 
       {/* 4. Startup-Level Implementation */}
       <Section icon={<Rocket size={18} />} title="Startup-Level Implementation" tint="bg-yellow-50">
-        <p className="text-sm leading-relaxed">{idea.implementation}</p>
+        <p className="text-sm leading-relaxed whitespace-pre-wrap">{idea.implementation}</p>
       </Section>
 
       {/* 5. Modern Tech Stack */}
