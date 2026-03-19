@@ -14,6 +14,7 @@ Usage:
 from __future__ import annotations
 
 import os
+import re
 import sys
 import uuid
 from datetime import datetime, timezone
@@ -29,6 +30,13 @@ from supabase import create_client
 from automation.ingest_arxiv import fetch_recent_papers
 from automation.llm_pipeline import generate_blueprints
 from automation.categorize import apply_rubric, enforce_distribution
+
+
+def _safe_date(val: str | None) -> str | None:
+    """Return val only if it's a valid YYYY-MM-DD date string."""
+    if val and re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(val).strip()):
+        return str(val).strip()
+    return None
 
 
 def get_supabase_client():
@@ -137,7 +145,7 @@ def run_pipeline(
             "paper_authors": paper.get("authors", []),
             "paper_abstract": paper.get("abstract"),
             "paper_arxiv_id": paper.get("arxivId"),
-            "paper_published_at": paper.get("publishedAt"),
+            "paper_published_at": _safe_date(paper.get("publishedAt")),
             "paper_primary_category": paper.get("primaryCategory"),
         }
         idea_rows.append(row)
